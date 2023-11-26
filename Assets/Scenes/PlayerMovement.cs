@@ -6,9 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] float movement;
-    [SerializeField] public const int SPEED = 10;
+    [SerializeField] public const int SPEED = 6;
     [SerializeField] bool isFacingRight = true;
-    [SerializeField] const float JUMPFORCE = 14.0f;
+    [SerializeField] const float JUMPFORCE = 250.0f;
     [SerializeField] bool jumpPressed = false;
     [SerializeField] bool isGrounded = true;
     // [SerializeField] Animator animator;
@@ -45,7 +45,9 @@ public class PlayerMovement : MonoBehaviour
             Flip();
         }
         if (jumpPressed && isGrounded)
+        {
             Jump();
+        }
         // else
         // {
         //     if (isGrounded)
