@@ -19,7 +19,7 @@ public class PauseResume : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void Pause()
     {
@@ -38,7 +38,7 @@ public class PauseResume : MonoBehaviour
         {
             g.SetActive(true);
         }
-        foreach(GameObject g in resumeMode)
+        foreach (GameObject g in resumeMode)
         {
             g.SetActive(false);
         }
@@ -58,5 +58,10 @@ public class PauseResume : MonoBehaviour
     public void BackToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

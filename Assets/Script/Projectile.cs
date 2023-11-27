@@ -30,8 +30,11 @@ public class Projectile : MonoBehaviour
             Instantiate(impactEffect, transform.position, Quaternion.identity);
             controller.GetComponent<Scorekeeper>().AddPoints(3);
             Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
-
-        Destroy(gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
