@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D rigid;
-    [SerializeField] float movement;
-    [SerializeField] SpriteRenderer sprite;
-    [SerializeField] Animator animator;
+    private Rigidbody2D rigid;
+    private float movement;
+    private SpriteRenderer sprite;
+    Animator animator;
 
     [SerializeField] private float JUMPFORCE = 5f;
     [SerializeField] private float SPEED = 6f;
     [SerializeField] private LayerMask jumpableGround;
     private BoxCollider2D coll;
     private enum MovementState { idle, running, jumping, falling };
-   
+
+    [SerializeField] private AudioSource jumpSoundEffect;
+    [SerializeField] private AudioSource shootSoundEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +38,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
+            jumpSoundEffect.Play();
             rigid.velocity = new Vector2(rigid.velocity.x, JUMPFORCE);
+        }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            shootSoundEffect.Play();
         }
     }
     //can be called potentially many times per frame -- best for physics
@@ -53,12 +61,12 @@ public class PlayerMovement : MonoBehaviour
         if (movement > 0f)
         {
             state = MovementState.running;
-            sprite.flipX = false;
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
         else if (movement < 0f)
         {
             state = MovementState.running;
-            sprite.flipX = true;
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
         else
         {
